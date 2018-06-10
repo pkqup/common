@@ -24,8 +24,6 @@ public class MyApplication extends MultiDexApplication {
 
         //初始化KLog,如果是debug模式，不打印
         KLog.init(isDebug);
-
-        //在这里为应用设置异常处理程序，然后我们的程序才能捕获未处理的异常
         CrashHandler.getInstance().init(this);
     }
 
