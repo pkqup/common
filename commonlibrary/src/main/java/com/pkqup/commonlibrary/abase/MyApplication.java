@@ -1,10 +1,9 @@
 package com.pkqup.commonlibrary.abase;
 
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.support.multidex.MultiDexApplication;
 
 import com.pkqup.commonlibrary.crash.CrashHandler;
+import com.pkqup.commonlibrary.util.AppUtils;
 import com.socks.library.KLog;
 
 /**
@@ -13,35 +12,12 @@ import com.socks.library.KLog;
  */
 public class MyApplication extends MultiDexApplication {
 
-    public static Context appContext;
-    public static boolean isDebug;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        appContext = getApplicationContext();
-        isDebug = checkInDebug(appContext);
-
-        //初始化KLog,如果是debug模式，不打印
-        KLog.init(isDebug);
+        AppUtils.init(this);
         CrashHandler.getInstance().init(this);
+        KLog.init(AppUtils.checkInDebug(this));
     }
 
-    //判断是否是debug模式
-    public static boolean checkInDebug(Context context) {
-        try {
-            ApplicationInfo info = context.getApplicationInfo();
-            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public static boolean isDebug() {
-        return isDebug;
-    }
-
-    public static Context getContext() {
-        return appContext;
-    }
 }
