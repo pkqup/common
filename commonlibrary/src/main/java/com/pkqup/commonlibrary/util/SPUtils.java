@@ -16,6 +16,7 @@ import java.util.Map;
 
 
 public class SPUtils {
+
     /**
      * 保存在手机里面的文件名
      */
@@ -24,8 +25,8 @@ public class SPUtils {
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
      */
-    public static void put(Context context, String key, Object object) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static void put(String key, Object object) {
+        SharedPreferences sp = AppUtils.getContext().getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
@@ -49,8 +50,8 @@ public class SPUtils {
     /**
      * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
      */
-    public static Object get(Context context, String key, Object defaultObject) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static Object get(String key, Object defaultObject) {
+        SharedPreferences sp = AppUtils.getContext().getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         if (defaultObject instanceof String) {
             return sp.getString(key, (String) defaultObject);
@@ -69,8 +70,8 @@ public class SPUtils {
     /**
      * 移除某个key值已经对应的值
      */
-    public static void remove(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static void remove(String key) {
+        SharedPreferences sp = AppUtils.getContext().getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(key);
@@ -80,8 +81,8 @@ public class SPUtils {
     /**
      * 清除所有数据
      */
-    public static void clear(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static void clear() {
+        SharedPreferences sp = AppUtils.getContext().getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
@@ -91,8 +92,8 @@ public class SPUtils {
     /**
      * 查询某个key是否已经存在
      */
-    public static boolean contains(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static boolean contains(String key) {
+        SharedPreferences sp = AppUtils.getContext().getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         return sp.contains(key);
     }
@@ -100,8 +101,8 @@ public class SPUtils {
     /**
      * 返回所有的键值对
      */
-    public static Map<String, ?> getAll(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static Map<String, ?> getAll() {
+        SharedPreferences sp = AppUtils.getContext().getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         return sp.getAll();
     }
@@ -110,10 +111,9 @@ public class SPUtils {
     /**
      * 保存图片到SharedPreferences
      *
-     * @param mContext
      * @param imageView
      */
-    public static void putImage(Context mContext, String key, ImageView imageView) {
+    public static void putImage(String key, ImageView imageView) {
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         // 将Bitmap压缩成字节数组输出流
@@ -123,7 +123,7 @@ public class SPUtils {
         byte[] byteArray = byStream.toByteArray();
         String imgString = new String(Base64.encodeToString(byteArray, Base64.DEFAULT));
         // 将String保存shareUtils
-        SPUtils.put(mContext, key, imgString);
+        SPUtils.put(key, imgString);
     }
 
     /**
@@ -133,7 +133,7 @@ public class SPUtils {
      * @param imageView
      */
     public static Bitmap getImage(Context mContext, String key, ImageView imageView) {
-        String imgString = (String) SPUtils.get(mContext, key, "");
+        String imgString = (String) SPUtils.get(key, "");
         if (!imgString.equals("")) {
             // 利用Base64将我们string转换
             byte[] byteArray = Base64.decode(imgString, Base64.DEFAULT);
