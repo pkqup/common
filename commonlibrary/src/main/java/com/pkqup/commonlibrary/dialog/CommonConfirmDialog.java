@@ -36,7 +36,7 @@ public class CommonConfirmDialog extends Dialog {
     }
 
     private void initView() {
-        View view = LayoutInflater.from(context).inflate(R.layout.common_dialog_confirm, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_common_confirm, null);
         Window window = getWindow();
         window.getDecorView().setPadding(0, 0, 0, 0);
         WindowManager.LayoutParams params = window.getAttributes();

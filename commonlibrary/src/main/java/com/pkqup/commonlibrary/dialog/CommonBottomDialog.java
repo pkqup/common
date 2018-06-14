@@ -23,6 +23,7 @@ public class CommonBottomDialog extends Dialog {
         void onItemClick(int position);
     }
 
+
     public void setCallBackListener(CommonBottomDialog.OnCallBackListener onCallBackListener) {
         this.onCallBackListener = onCallBackListener;
     }
@@ -33,7 +34,7 @@ public class CommonBottomDialog extends Dialog {
 
     public CommonBottomDialog(@NonNull Context context, int themeResIds) {
         super(context, themeResIds);
-        setContentView(R.layout.common_bottom_dialog);
+        setContentView(R.layout.dialog_common_bottom);
         getWindow().getAttributes().gravity = Gravity.BOTTOM;
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
                 | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

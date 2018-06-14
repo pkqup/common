@@ -94,7 +94,7 @@ public class PermissionDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View dialogView = inflater.inflate(R.layout.permission_dialog, container, false);
+        View dialogView = inflater.inflate(R.layout.dialog_common_permission, container, false);
         return dialogView;
     }
 

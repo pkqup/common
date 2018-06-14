@@ -26,4 +26,12 @@
         <item name="android:windowEnterAnimation">@anim/anim_up_in</item>
         <item name="android:windowExitAnimation">@anim/anim_up_out</item>
     </style>
+
+    <style name="progressBarStyle">
+        <item name="android:indeterminateDrawable">@drawable/loading_progress</item>
+        <item name="android:minWidth">32dip</item>
+        <item name="android:maxWidth">32dip</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
+    </style>
 </resources>
