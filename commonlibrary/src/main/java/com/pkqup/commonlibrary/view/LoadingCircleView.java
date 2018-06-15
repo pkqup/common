@@ -16,7 +16,7 @@ import com.pkqup.commonlibrary.util.SizeUtils;
  * e-mail:xiasuhuei321@163.com
  */
 
-public class LoadCircleView extends View {
+public class LoadingCircleView extends View {
     public final String TAG = getClass().getSimpleName();
 
     private float mPadding = 0f;
@@ -26,15 +26,15 @@ public class LoadCircleView extends View {
     private int mWidth = 0;
     private int currentLineIndex = 0;
 
-    public LoadCircleView(Context context) {
+    public LoadingCircleView(Context context) {
         this(context, null);
     }
 
-    public LoadCircleView(Context context, AttributeSet attrs) {
+    public LoadingCircleView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public LoadCircleView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LoadingCircleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         init();
