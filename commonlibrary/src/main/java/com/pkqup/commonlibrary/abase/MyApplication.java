@@ -8,12 +8,14 @@ import com.socks.library.KLog;
 
 public class MyApplication extends MultiDexApplication {
 
+    private static boolean isDeug;
+
     @Override
     public void onCreate() {
         super.onCreate();
         AppUtils.init(this);
         CrashHandler.getInstance().init(this);
-        KLog.init(AppUtils.checkInDebug(this));
+        KLog.init(AppUtils.isDebug());
     }
 
 }
