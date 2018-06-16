@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -24,6 +25,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
+import okio.BufferedSource;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -39,25 +41,81 @@ public class HttpUtils {
     private volatile static HttpUtils mInstance;
     private Retrofit mRetrofit;
 
+
+    // 获取网络请求的单例（双重校验锁的单例模式）
+    public static HttpUtils getInstance() {
+        if (mInstance == null) {
+            synchronized (HttpUtils.class) {
+                if (mInstance == null) {
+                    mInstance = new HttpUtils();
+                }
+            }
+        }
+        return mInstance;
+    }
+
+    private HttpUtils() {
+        // OkHttp缓存设置
+        File httpCacheDirectory =
+                new File(AppUtils.getContext().getCacheDir(), "PkqHttpCache");
+        int cacheSize = 10 * 1024 * 1024;
+        Cache cache = new Cache(httpCacheDirectory, cacheSize);
+
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .addInterceptor(logInterceptor)// 添加log拦截器
+                .cache(cache)// 设置网络请求缓存配置
+                .connectTimeout(10, TimeUnit.SECONDS)// 设置连接超时时间
+                .readTimeout(10, TimeUnit.SECONDS)// 设置读取超时时间
+                .writeTimeout(10, TimeUnit.SECONDS)//设置写入超时时间
+                .build();
+
+
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)// 配置服务器地址
+                .addConverterFactory(MyGSonConverterFactory.create(GSonUtils.getmInstance()))// 配置GSon数据转换
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 配置RxJava适配器
+                .client(mClient)// 关联OkHttp
+                .build();
+
+    }
+
+    public Retrofit getRetrofit() {
+        return mRetrofit;
+    }
+
     private Interceptor logInterceptor = new Interceptor() {
         @Override
         public Response intercept(@NonNull Chain chain) throws IOException {
             //请求
             long startTime = System.currentTimeMillis();
-            Request request = chain.request();
-            Request.Builder requestBuilder = request.newBuilder();
-            addCommonParams(request, requestBuilder);
-            request = requestBuilder.build();
+            Request oldRequest = chain.request();
+
+            // 添加新的参数
+            HttpUrl.Builder authorizedUrlBuilder = oldRequest.url()
+                    .newBuilder()
+                    .scheme(oldRequest.url().scheme())
+                    .host(oldRequest.url().host());
+            Request.Builder builder = oldRequest.newBuilder()
+                    .method(oldRequest.method(), oldRequest.body());
+
+            addCommonParams(authorizedUrlBuilder);
+
+            // 新的请求
+            Request newRequest = builder.url(authorizedUrlBuilder.build()).build();
 
             //响应
-            Response response = chain.proceed(request);
+            Response response = chain.proceed(newRequest);
+            //这个是因为，如果请求下载链接的话，会导致无法获取response
+            BufferedSource source = response.body().source();
+            source.request(Long.MAX_VALUE);
+
 
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
             String content = response.body().string();
             KLog.e("----------Request Start----------------");
-            KLog.e("| " + request.toString());
-            KLog.e("| " + bodyToString(request.body()));
+            KLog.e("| " + newRequest.toString());
+            KLog.e("| RequestBody:" + bodyToString(newRequest.body()));
             KLog.e("| Response:" + content);
             KLog.e("----------Request End:" + duration + "毫秒----------");
 
@@ -67,6 +125,18 @@ public class HttpUtils {
                     .build();
         }
     };
+
+    private void addCommonParams(HttpUrl.Builder authorizedUrlBuilder) {
+        String userId = "0";
+        String userToken = "";
+        authorizedUrlBuilder.addQueryParameter("userId", userId);
+        authorizedUrlBuilder.addQueryParameter("userToken", userToken);
+        authorizedUrlBuilder.addQueryParameter("apiVersion", "v1");
+        authorizedUrlBuilder.addQueryParameter("os", "android");
+        authorizedUrlBuilder.addQueryParameter("platform", "android");
+        authorizedUrlBuilder.addQueryParameter("versionCode", String.valueOf(AppUtils.getVersionCode()));
+        authorizedUrlBuilder.addQueryParameter("osVersion",  android.os.Build.VERSION.SDK_INT + "");
+    }
 
     private void addCommonParams(Request request, Request.Builder requestBuilder) {
         Map<String, String> params = new HashMap<>();
@@ -135,44 +205,6 @@ public class HttpUtils {
         }
     }
 
-    private HttpUtils() {
-        // OkHttp缓存设置
-        File httpCacheDirectory =
-                new File(AppUtils.getContext().getCacheDir(), "PkqHttpCache");
-        int cacheSize = 10 * 1024 * 1024;
-        Cache cache = new Cache(httpCacheDirectory, cacheSize);
-
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .addInterceptor(logInterceptor)// 添加log拦截器
-                .cache(cache)// 设置网络请求缓存配置
-                .connectTimeout(10, TimeUnit.SECONDS)// 设置连接超时时间
-                .readTimeout(10, TimeUnit.SECONDS)// 设置读取超时时间
-                .writeTimeout(10, TimeUnit.SECONDS)//设置写入超时时间
-                .build();
 
 
-        mRetrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)// 配置服务器地址
-                .addConverterFactory(MyGSonConverterFactory.create(GSonUtils.getmInstance()))// 配置GSon数据转换
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 配置RxJava适配器
-                .client(mClient)// 关联OkHttp
-                .build();
-
-    }
-
-    // 获取网络请求的单例（双重校验锁的单例模式）
-    public static HttpUtils getInstance() {
-        if (mInstance == null) {
-            synchronized (HttpUtils.class) {
-                if (mInstance == null) {
-                    mInstance = new HttpUtils();
-                }
-            }
-        }
-        return mInstance;
-    }
-
-    public Retrofit getmRetrofit() {
-        return mRetrofit;
-    }
 }

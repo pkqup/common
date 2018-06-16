@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.pkqup.commonlibrary.util.SizeUtils;
+import com.socks.library.KLog;
 
 /**
  * Created by xiasuhuei321 on 2017/5/15.
