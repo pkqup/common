@@ -54,5 +54,8 @@ dependencies {
     api 'com.squareup.retrofit2:converter-gson:2.4.0'    //Retrofit数据转换器//
     api 'com.squareup.okhttp3:okhttp:3.10.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.9.1'    //okHttp日志拦截器
+
+    //TabLayout
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 }
 
