@@ -1,7 +1,7 @@
 package com.pkqup.commonlibrary.net.bean;
 
 
-public class Result<T>{
+public class ResultBean<T>{
 
     private int code;
     private String message;

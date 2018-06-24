@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.socks.library.KLog;
+
 /**
  * ================================================
  * 作    者：廖子尧
@@ -143,6 +145,7 @@ public class VerticalSlide extends ViewGroup {
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             // 滑动松开后，需要向上或者乡下粘到特定的位置, 默认是粘到最顶端
             int finalTop = 0;
+            KLog.e(yvel);
             if (releasedChild == view1) {
                 // 拖动第一个view松手
                 if (yvel < -VEL_THRESHOLD || releasedChild.getTop() < -DISTANCE_THRESHOLD) {
