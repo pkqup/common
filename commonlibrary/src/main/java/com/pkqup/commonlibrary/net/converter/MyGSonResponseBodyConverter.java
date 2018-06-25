@@ -3,7 +3,7 @@ package com.pkqup.commonlibrary.net.converter;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
-import com.pkqup.commonlibrary.net.bean.Result;
+import com.pkqup.commonlibrary.net.bean.ResultBean;
 import com.pkqup.commonlibrary.net.exception.ApiException;
 
 import java.io.ByteArrayInputStream;
@@ -29,7 +29,7 @@ public class MyGSonResponseBodyConverter<T> implements Converter<ResponseBody, T
     @Override
     public T convert(ResponseBody value) throws IOException {
         String response = value.string();
-        Result re = mGson.fromJson(response, Result.class);
+        ResultBean re = mGson.fromJson(response, ResultBean.class);
         if (re.getCode() != 200) {
             value.close();
             throw new ApiException(re.getMessage(), re.getCode());
