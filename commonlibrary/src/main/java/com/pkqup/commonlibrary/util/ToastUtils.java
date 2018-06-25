@@ -9,9 +9,9 @@ import android.widget.Toast;
  */
 public class ToastUtils {
 
-    private static Toast toast;//实现不管我们触发多少次Toast调用，都只会持续一次Toast显示的时长
+    private static Toast toast;
 
-    public static void showShortToast(String msg) {
+    public static void showShort(String msg) {
         if (AppUtils.getContext() != null) {
             if (toast == null) {
                 toast = Toast.makeText(AppUtils.getContext(), msg, Toast.LENGTH_SHORT);

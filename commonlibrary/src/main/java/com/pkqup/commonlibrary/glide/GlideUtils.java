@@ -30,7 +30,7 @@ public class GlideUtils {
     String gif3 = "http://img.zcool.cn/community/01d6dd554b93f0000001bf72b4f6ec.jpg";
 
 
-    public static void loadImage(Context context, String url, ImageView imageView) {
+    public static void loadImage(Context context, Object url, ImageView imageView) {
         GlideApp.with(context)
                 .load(url)
                 .format(DecodeFormat.PREFER_RGB_565)//像素类型
