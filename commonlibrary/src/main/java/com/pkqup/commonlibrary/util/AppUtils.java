@@ -64,12 +64,17 @@ public class AppUtils {
         }
     }
 
+    public static String getThreadName() {
+        return Thread.currentThread().getName();
+    }
+
 
     /**
      * 获取本地apk的名称
+     *
      * @return String
      */
-    public static String getAppName( ) {
+    public static String getAppName() {
         try {
             PackageManager e = mContext.getPackageManager();
             PackageInfo packageInfo = e.getPackageInfo(mContext.getPackageName(), 0);
@@ -83,6 +88,7 @@ public class AppUtils {
 
     /**
      * 获取本地Apk版本名称
+     *
      * @return String
      */
     public static String getVersionName() {
@@ -97,9 +103,10 @@ public class AppUtils {
 
     /**
      * 获取本地Apk版本号
+     *
      * @return int
      */
-    public static int getVersionCode( ) {
+    public static int getVersionCode() {
         int verCode = -1;
         try {
             verCode = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0).versionCode;
@@ -111,6 +118,7 @@ public class AppUtils {
 
     /**
      * 获取应用图标
+     *
      * @param context
      * @param packageName
      * @return
@@ -129,6 +137,7 @@ public class AppUtils {
 
     /**
      * 获取应用第一次安装日期
+     *
      * @param context
      * @param packageName
      * @return
@@ -146,6 +155,7 @@ public class AppUtils {
 
     /**
      * 获取应用更新日期
+     *
      * @param context
      * @param packageName
      * @return
@@ -163,6 +173,7 @@ public class AppUtils {
 
     /**
      * 获取应用大小
+     *
      * @param context
      * @param packageName
      * @return
@@ -180,6 +191,7 @@ public class AppUtils {
 
     /**
      * 获取应用apk文件
+     *
      * @param context
      * @param packageName
      * @return
@@ -197,6 +209,7 @@ public class AppUtils {
 
     /**
      * 获取应用的安装市场
+     *
      * @param context
      * @param packageName
      * @return
@@ -207,6 +220,7 @@ public class AppUtils {
 
     /**
      * 获取应用签名
+     *
      * @param context
      * @param packageName
      * @return
@@ -243,6 +257,7 @@ public class AppUtils {
 
     /**
      * 获取应用兼容sdk
+     *
      * @param context
      * @param packageName
      * @return
@@ -260,6 +275,7 @@ public class AppUtils {
 
     /**
      * 获取应用uid
+     *
      * @param context
      * @param packageName
      * @return
@@ -277,6 +293,7 @@ public class AppUtils {
 
     /**
      * 获取Cpu内核数
+     *
      * @return
      */
     public static int getNumCores() {
@@ -299,6 +316,7 @@ public class AppUtils {
 
     /**
      * 获得root权限
+     *
      * @param context
      * @return
      */
@@ -331,6 +349,7 @@ public class AppUtils {
 
     /**
      * 获取应用的所有权限
+     *
      * @param context
      * @param packname
      * @return
@@ -348,6 +367,7 @@ public class AppUtils {
 
     /**
      * 是否有权限
+     *
      * @param context
      * @param permission
      * @return
@@ -373,6 +393,7 @@ public class AppUtils {
 
     /**
      * 应用是否安装
+     *
      * @param context
      * @param packageName
      * @return
@@ -396,6 +417,7 @@ public class AppUtils {
 
     /**
      * 安装应用
+     *
      * @param context
      * @param filePath
      * @return
@@ -414,6 +436,7 @@ public class AppUtils {
 
     /**
      * 卸载应用
+     *
      * @param context
      * @param packageName
      * @return
@@ -430,6 +453,7 @@ public class AppUtils {
 
     /**
      * 是否是系统应用
+     *
      * @param context
      * @param packageName
      * @return
@@ -451,6 +475,7 @@ public class AppUtils {
 
     /**
      * 服务是否在运行
+     *
      * @param context
      * @param className
      * @return
@@ -469,6 +494,7 @@ public class AppUtils {
 
     /**
      * 停止服务
+     *
      * @param context
      * @param className
      * @return
@@ -489,6 +515,7 @@ public class AppUtils {
 
     /**
      * 结束进程
+     *
      * @param context
      * @param pid
      * @param processName
@@ -513,6 +540,7 @@ public class AppUtils {
 
     /**
      * 运行脚本
+     *
      * @param script
      * @return
      */
@@ -586,6 +614,7 @@ public class AppUtils {
 
     /**
      * 启动应用
+     *
      * @param context
      * @param packagename
      */
@@ -628,11 +657,12 @@ public class AppUtils {
 
     /**
      * 获得应用申明的所有权限列表
+     *
      * @param context 上下文
      * @return 获得应用申明的所有权限列表
      */
-    public static List<String> getPermissions(Context context){
-        List<String> permissions=new ArrayList<String>();
+    public static List<String> getPermissions(Context context) {
+        List<String> permissions = new ArrayList<String>();
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_PERMISSIONS);
             permissions.addAll(Arrays.asList(packageInfo.requestedPermissions));

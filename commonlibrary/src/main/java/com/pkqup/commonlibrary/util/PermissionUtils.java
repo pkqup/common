@@ -36,18 +36,18 @@ import com.yanzhenjie.permission.RationaleListener;
 
 public class PermissionUtils {
 
-    public static boolean isRequetedPhone = false; //是否申请过系统设置权限
+    public static boolean isRequestedPhone = false; //是否申请过系统设置权限
 
     public static void SystemSetting(final Context context) {
         SystemSetting(context, false);
     }
 
     public static void SystemSetting(final Context context, final boolean everytime) {
-        if(!everytime ) {
-            if (isRequetedPhone) {
+        if (!everytime) {
+            if (isRequestedPhone) {
                 return;
             }
-            isRequetedPhone = true;
+            isRequestedPhone = true;
         }
 
         final PermissionDialog permissionDialog = new PermissionDialog();
@@ -64,7 +64,7 @@ public class PermissionUtils {
                 context.startActivity(intent);
                 permissionDialog.dismiss();
                 if (!everytime) {
-                    isRequetedPhone = false; //不再弹出
+                    isRequestedPhone = false; //不再弹出
                 }
             }
         });
@@ -74,7 +74,7 @@ public class PermissionUtils {
             public void onClick(View v) {
                 permissionDialog.dismiss();
                 if (!everytime) {
-                    isRequetedPhone = true; //不再弹出
+                    isRequestedPhone = true; //不再弹出
                 }
             }
         });
@@ -94,7 +94,7 @@ public class PermissionUtils {
     public static void PermissionForStart(final Context context, PermissionListener listener) {
         // 申请多个权限。
         String[] permission = {
-                Manifest.permission.READ_LOGS,
+//                Manifest.permission.READ_LOGS,
                 //PHONE
                 Manifest.permission.READ_PHONE_STATE,
 
@@ -173,7 +173,6 @@ public class PermissionUtils {
     }
 
 
-
     private static void requestPermission(final Context context, PermissionListener listener, String[] permission, final String tips, final boolean needDialog) {
         if (null == context) return;
         AndPermission.with(context)
@@ -204,7 +203,6 @@ public class PermissionUtils {
                             public void onClick(View v) {
                                 rationale.resume();
                                 permissionDialog.dismiss();
-//                                isRequesetingForAd = false;
                             }
                         });
 
@@ -212,7 +210,6 @@ public class PermissionUtils {
                             @Override
                             public void onClick(View v) {
                                 permissionDialog.dismiss();
-//                                isRequesetingForAd = false;
                             }
                         });
 
