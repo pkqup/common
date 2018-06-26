@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_snap_up"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/tv_hour_decade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/t_red"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_hour_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:textColor="@color/t_red"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/colon_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:text=":"
+            android:textColor="@color/t_red"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/tv_min_decade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:textColor="@color/t_red"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_min_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:textColor="@color/t_red"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/colon_minute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:text=":"
+            android:textColor="@color/t_red"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/tv_sec_decade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:textColor="@color/t_red"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_sec_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:textColor="@color/t_red"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>
