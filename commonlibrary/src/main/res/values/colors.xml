@@ -12,7 +12,7 @@
 
     <color name="bg_black">#000000</color>
     <color name="bg_white">#FFFFFF</color>
-    <color name="bg_gray">#e8e5e1</color>
+    <color name="bg_gray">#f8f8f8</color>
     <color name="bg_red">#CD3333</color>
     <color name="line">#cccccc</color>
 
