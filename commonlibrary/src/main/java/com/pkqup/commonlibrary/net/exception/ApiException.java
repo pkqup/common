@@ -1,8 +1,6 @@
 package com.pkqup.commonlibrary.net.exception;
 
-/**
- * Created by 康颢曦 on 2017/11/7.
- */
+
 
 public class ApiException extends RuntimeException {
 

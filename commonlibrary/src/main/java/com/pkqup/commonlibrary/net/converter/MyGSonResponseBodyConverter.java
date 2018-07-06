@@ -18,18 +18,18 @@ import retrofit2.Converter;
 
 public class MyGSonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     private static final Charset UTF_8 = Charset.forName("UTF-8");
-    private final Gson mGson;
+    private final Gson gson;
     private final TypeAdapter<T> adapter;
 
     public MyGSonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter) {
-        mGson = gson;
+        this.gson = gson;
         this.adapter = adapter;
     }
 
     @Override
     public T convert(ResponseBody value) throws IOException {
         String response = value.string();
-        ResultBean re = mGson.fromJson(response, ResultBean.class);
+        ResultBean re = gson.fromJson(response, ResultBean.class);
         if (re.getCode() != 200) {
             value.close();
             throw new ApiException(re.getMessage(), re.getCode());
@@ -39,7 +39,7 @@ public class MyGSonResponseBodyConverter<T> implements Converter<ResponseBody, T
         Charset charset = mediaType != null ? mediaType.charset(UTF_8) : UTF_8;
         ByteArrayInputStream bis = new ByteArrayInputStream(response.getBytes());
         InputStreamReader reader = new InputStreamReader(bis, charset);
-        JsonReader jsonReader = mGson.newJsonReader(reader);
+        JsonReader jsonReader = gson.newJsonReader(reader);
         try {
             return adapter.read(jsonReader);
         } finally {
