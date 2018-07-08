@@ -62,7 +62,8 @@ dependencies {
     api 'com.youth.banner:banner:1.4.10'
 
 
-    compile 'com.lzy.widget:view-core:0.2.3'
+    api 'com.lzy.widget:view-core:0.2.3'
+    api 'de.hdodenhof:circleimageview:2.2.0'
 
 }
 
