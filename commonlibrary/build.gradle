@@ -61,8 +61,8 @@ dependencies {
     //Banner
     api 'com.youth.banner:banner:1.4.10'
 
-
     api 'com.lzy.widget:view-core:0.2.3'
+    //圆形图片
     api 'de.hdodenhof:circleimageview:2.2.0'
 
 }

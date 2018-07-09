@@ -181,6 +181,7 @@ public class VerticalSlide extends ViewGroup {
         }
     }
 
+
     @Override
     public void computeScroll() {
         if (mDragHelper.continueSettling(true)) {
@@ -193,7 +194,9 @@ public class VerticalSlide extends ViewGroup {
         }
     }
 
-    /** 滚动到顶部 */
+    /**
+     * 滚动到顶部
+     */
     public void goTop(OnGoTopListener goTopListener) {
         this.goTopListener = goTopListener;
         if (goTopListener != null) goTopListener.goTop();

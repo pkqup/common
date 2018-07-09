@@ -86,4 +86,22 @@ public class VerticalScrollView extends ScrollView implements ObservableView {
     public void goTop() {
         scrollTo(0, 0);
     }
+
+    public interface OnScrollListener {
+        void onScroll(int scrollY);
+    }
+
+    private OnScrollListener onScrollListener;
+
+    public void setOnScrollListener(OnScrollListener listener) {
+        this.onScrollListener = listener;
+    }
+
+    @Override
+    public void computeScroll() {
+        super.computeScroll();
+        if (onScrollListener != null) {
+            onScrollListener.onScroll(getScrollY());
+        }
+    }
 }
