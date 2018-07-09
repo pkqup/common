@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">commonlibrary</string>
+    <string name="pageBehavior" translatable="false" >com.pkqup.commonlibrary.view.goodspage.PageBehavior</string >
 </resources>
