@@ -4,7 +4,9 @@ import android.support.annotation.NonNull;
 
 import com.pkqup.commonlibrary.net.bean.CommonParams;
 import com.pkqup.commonlibrary.net.converter.MyGSonConverterFactory;
+import com.pkqup.commonlibrary.net.exception.ApiException;
 import com.pkqup.commonlibrary.util.AppUtils;
+import com.pkqup.commonlibrary.util.NetWorkUtils;
 import com.socks.library.KLog;
 
 import java.io.File;
@@ -62,6 +64,7 @@ public class HttpUtils {
         Cache cache = new Cache(httpCacheDirectory, cacheSize);
 
         OkHttpClient mClient = new OkHttpClient.Builder()
+                .addInterceptor(netInterceptor)// 添加网络判断
                 .addInterceptor(logInterceptor)// 添加log拦截器
                 .cache(cache)// 设置网络请求缓存配置
                 .connectTimeout(10, TimeUnit.SECONDS)// 设置连接超时时间
@@ -82,6 +85,17 @@ public class HttpUtils {
     public Retrofit getRetrofit() {
         return mRetrofit;
     }
+
+    private Interceptor netInterceptor = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            if (NetWorkUtils.isNetworkConnected()) {
+                return chain.proceed(chain.request());
+            } else {
+                throw new ApiException("网络未连接，请连接后重试", ApiException.NO_NETWORK);
+            }
+        }
+    };
 
     private Interceptor logInterceptor = new Interceptor() {
         @Override
@@ -135,76 +149,24 @@ public class HttpUtils {
         authorizedUrlBuilder.addQueryParameter("os", "android");
         authorizedUrlBuilder.addQueryParameter("platform", "android");
         authorizedUrlBuilder.addQueryParameter("versionCode", String.valueOf(AppUtils.getVersionCode()));
-        authorizedUrlBuilder.addQueryParameter("osVersion",  android.os.Build.VERSION.SDK_INT + "");
+        authorizedUrlBuilder.addQueryParameter("osVersion", android.os.Build.VERSION.SDK_INT + "");
     }
 
-    private void addCommonParams(Request request, Request.Builder requestBuilder) {
-        Map<String, String> params = new HashMap<>();
 
-        //加入单独的参数
-        FormBody formBody = (FormBody) request.body();
-        if (null != formBody) {
-            for (int i = 0; i < formBody.size(); i++) {
-                params.put(formBody.encodedName(i), formBody.encodedValue(i));
-            }
-        }
-
-/*        //加入公共参数
-        String userId = "0";
-        String userToken = "";
-        CommonParams commonParams = new CommonParams();
-        commonParams.setUserId(userId);
-        commonParams.setUserToken(userToken);
-        commonParams.setOs("android");
-        commonParams.setPlatform("android");
-        commonParams.setApiVersion("v1");
-        commonParams.setPlatformVersion(String.valueOf(AppUtils.getVersionCode()));
-        commonParams.setOsVersion(android.os.Build.VERSION.SDK_INT + "");
-        params.put("params", commonParams);
-
-        String json = GSonUtils.getmInstance().toJson(params);
-        KLog.e("----------Request Start----------------");
-        KLog.e("| " + request.toString());
-        KLog.e(json);
-        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(mediaType, json);*/
-
-        //加入公共参数
-        String userId = "0";
-        String userToken = "";
-        params.put("userId", userId);
-        params.put("userToken", userToken);
-        params.put("sign", "");
-        params.put("apiVersion", "v1");
-        params.put("os", "android");
-        params.put("platform", "android");
-        params.put("platformVersion", String.valueOf(AppUtils.getVersionCode()));
-        params.put("osVersion", android.os.Build.VERSION.SDK_INT + "");
-
-        FormBody.Builder formBodyBuilder = new FormBody.Builder();
-        if (params.size() > 0) {
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                formBodyBuilder.add(URLDecoder.decode(entry.getKey()), URLDecoder.decode(entry.getValue()));
-            }
-        }
-        requestBuilder.post(formBodyBuilder.build());
-    }
-
-    private static String bodyToString(final RequestBody request){
+    private static String bodyToString(final RequestBody request) {
         try {
             final RequestBody copy = request;
             final Buffer buffer = new Buffer();
-            if(copy != null)
+            if (copy != null) {
                 copy.writeTo(buffer);
-            else
+            } else {
                 return "";
+            }
             return buffer.readUtf8();
-        }
-        catch (final IOException e) {
+        } catch (final IOException e) {
             return "did not work";
         }
     }
-
 
 
 }

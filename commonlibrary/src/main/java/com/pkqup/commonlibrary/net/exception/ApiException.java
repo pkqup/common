@@ -1,8 +1,9 @@
 package com.pkqup.commonlibrary.net.exception;
 
 
-
 public class ApiException extends RuntimeException {
+
+    public final static int NO_NETWORK = -1;//无网络
 
     private int code;
 
