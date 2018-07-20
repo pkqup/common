@@ -64,6 +64,6 @@ dependencies {
     api 'com.lzy.widget:view-core:0.2.3'
     //圆形图片
     api 'de.hdodenhof:circleimageview:2.2.0'
-
+    api 'com.github.promeg:tinypinyin:1.0.0'
 }
 
