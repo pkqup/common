@@ -39,9 +39,36 @@ public class TimeUtils {
     }
 
     /*
+     * 将yyyy-MM-dd转换为毫秒值
+     */
+    public static long yearMDToMillis(String s) {
+        long milTime = 0;
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE, Locale.getDefault());
+            Date date = simpleDateFormat.parse(s);
+            milTime = date.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return milTime;
+    }
+
+    /*
+     * 将毫秒值转换为yyyy-MM-dd
+     */
+    public static String millisToYearMD(String s) {
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE, Locale.getDefault());
+        long lt = Long.valueOf(s);
+        Date date = new Date(lt);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+
+    /*
      * 将HH:mm:ss转换为毫秒值
      */
-    public static long dateToStamp(String s) {
+    public static long hourMSToMillis(String s) {
         long milTime = 0;
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TIME, Locale.getDefault());
@@ -56,7 +83,7 @@ public class TimeUtils {
     /*
      * 将毫秒值转换为HH:mm:ss
      */
-    public static String stampToDate(String s) {
+    public static String millisToHourMS(String s) {
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TIME, Locale.getDefault());
         long lt = Long.valueOf(s);
@@ -64,7 +91,5 @@ public class TimeUtils {
         res = simpleDateFormat.format(date);
         return res;
     }
-
-
 
 }
