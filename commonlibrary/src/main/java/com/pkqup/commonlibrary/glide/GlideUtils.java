@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.pkqup.commonlibrary.R;
 
 public class GlideUtils {
 
@@ -35,6 +36,7 @@ public class GlideUtils {
                 .load(url)
                 .format(DecodeFormat.PREFER_RGB_565)//像素类型
                 .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存所有尺寸
+                .error(R.mipmap.error_pic)
                 .into(imageView);
     }
 
