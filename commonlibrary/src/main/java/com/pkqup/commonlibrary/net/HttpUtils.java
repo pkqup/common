@@ -141,15 +141,7 @@ public class HttpUtils {
     };
 
     private void addCommonParams(HttpUrl.Builder authorizedUrlBuilder) {
-        String userId = "0";
-        String userToken = "";
-        authorizedUrlBuilder.addQueryParameter("userId", userId);
-        authorizedUrlBuilder.addQueryParameter("userToken", userToken);
-        authorizedUrlBuilder.addQueryParameter("apiVersion", "v1");
-        authorizedUrlBuilder.addQueryParameter("os", "android");
-        authorizedUrlBuilder.addQueryParameter("platform", "android");
-        authorizedUrlBuilder.addQueryParameter("versionCode", String.valueOf(AppUtils.getVersionCode()));
-        authorizedUrlBuilder.addQueryParameter("osVersion", android.os.Build.VERSION.SDK_INT + "");
+        authorizedUrlBuilder.addQueryParameter("format", "json");
     }
 
 
