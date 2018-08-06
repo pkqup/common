@@ -38,7 +38,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 public class HttpUtils {
 
-    private static String BASE_URL = "http://api.tianapi.com/";
+    private static String BASE_URL = "http://mall.chunlangjiu.com/";
 
     private volatile static HttpUtils mInstance;
     private Retrofit mRetrofit;
@@ -59,7 +59,7 @@ public class HttpUtils {
     private HttpUtils() {
         // OkHttp缓存设置
         File httpCacheDirectory =
-                new File(AppUtils.getContext().getCacheDir(), "PkqHttpCache");
+                new File(AppUtils.getContext().getCacheDir(), "ChunlangHttpCache");
         int cacheSize = 10 * 1024 * 1024;
         Cache cache = new Cache(httpCacheDirectory, cacheSize);
 

@@ -30,9 +30,9 @@ public class MyGSonResponseBodyConverter<T> implements Converter<ResponseBody, T
     public T convert(ResponseBody value) throws IOException {
         String response = value.string();
         ResultBean re = gson.fromJson(response, ResultBean.class);
-        if (re.getCode() != 200) {
+        if (re.getErrorcode() != 0) {
             value.close();
-            throw new ApiException(re.getMessage(), re.getCode());
+            throw new ApiException(re.getMsg(), re.getErrorcode());
         }
 
         MediaType mediaType = value.contentType();
