@@ -7,6 +7,7 @@ import com.pkqup.commonlibrary.net.converter.MyGSonConverterFactory;
 import com.pkqup.commonlibrary.net.exception.ApiException;
 import com.pkqup.commonlibrary.util.AppUtils;
 import com.pkqup.commonlibrary.util.NetWorkUtils;
+import com.pkqup.commonlibrary.util.SPUtils;
 import com.socks.library.KLog;
 
 import java.io.File;
@@ -130,7 +131,7 @@ public class HttpUtils {
             KLog.e("----------Request Start----------------");
             KLog.e("| " + newRequest.toString());
             KLog.e("| RequestBody:" + bodyToString(newRequest.body()));
-            KLog.e("| Response:" +content);
+            KLog.e("| Response:" + content);
             KLog.e("----------Request End:" + duration + "毫秒----------");
 
             //在调用了response.body().string()方法之后，response中的流会被关闭，我们需要创建出一个新的response给应用层处理。
@@ -141,7 +142,9 @@ public class HttpUtils {
     };
 
     private void addCommonParams(HttpUrl.Builder authorizedUrlBuilder) {
+        String token = (String) SPUtils.get("token", "");
         authorizedUrlBuilder.addQueryParameter("format", "json");
+        authorizedUrlBuilder.addQueryParameter("accessToken", token);
     }
 
 
