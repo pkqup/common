@@ -1,5 +1,6 @@
 package com.zaaach.citypicker;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -97,7 +98,8 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
         }
         mAllCities.add(0, mLocatedCity);
         mAllCities.add(1, new HotCity("热门城市", "未知", "0"));
-        mResults = mAllCities;
+        mResults = new ArrayList<>();
+        mResults.addAll(mAllCities);
     }
 
     private void initLocatedCity() {
@@ -140,6 +142,7 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
         }
     }
 
+    @SuppressLint("ResourceType")
     public void setAnimationStyle(@StyleRes int style) {
         this.mAnimStyle = style <= 0 ? R.style.DefaultCityPickerAnimation : style;
     }
@@ -220,13 +223,20 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
         if (TextUtils.isEmpty(keyword)) {
             mClearAllBtn.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.GONE);
-            mResults = mAllCities;
+            mResults.clear();
+            mResults.addAll(mAllCities);
             ((SectionItemDecoration) (mRecyclerView.getItemDecorationAt(0))).setData(mResults);
             mAdapter.updateData(mResults);
         } else {
             mClearAllBtn.setVisibility(View.VISIBLE);
             //开始数据库查找
-            mResults = dbManager.searchCity(keyword);
+            mResults.clear();
+            for (City mAllCity : mAllCities) {
+                if (mAllCity.getName().contains(keyword) || mAllCity.getPinyin().contains(keyword)) {
+                    mResults.add(mAllCity);
+                }
+            }
+//            mResults = dbManager.searchCity(keyword);
             ((SectionItemDecoration) (mRecyclerView.getItemDecorationAt(0))).setData(mResults);
             if (mResults == null || mResults.isEmpty()) {
                 mEmptyView.setVisibility(View.VISIBLE);
