@@ -70,6 +70,10 @@ public class CommonConfirmDialog extends Dialog {
         });
     }
 
+    public void setDialogStr(String cancelStr,String confirmStr){
+        tv_cancel.setText(cancelStr);
+        tv_confirm.setText(confirmStr);
+    }
 
     public interface CallBack {
         void onConfirm();
