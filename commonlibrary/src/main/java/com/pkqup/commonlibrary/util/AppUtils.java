@@ -68,7 +68,6 @@ public class AppUtils {
         return Thread.currentThread().getName();
     }
 
-
     /**
      * 获取本地apk的名称
      *
