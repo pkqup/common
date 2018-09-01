@@ -291,10 +291,8 @@ public class SystemUtils {
     /**
      * 跳转至拨号界面
      *
-     * @param mContext
-     *            上下文Context
-     * @param phoneNumber
-     *            需要呼叫的手机号码
+     * @param mContext    上下文Context
+     * @param phoneNumber 需要呼叫的手机号码
      */
     public static void toCallPhoneActivity(Context mContext, String phoneNumber) {
         Uri uri = Uri.parse("tel:" + phoneNumber);
@@ -363,12 +361,9 @@ public class SystemUtils {
     /**
      * 跳转至发送短信界面(自动设置接收方的号码)
      *
-     * @param mContext
-     *            Activity
-     * @param strPhone
-     *            手机号码
-     * @param strMsgContext
-     *            短信内容
+     * @param mContext      Activity
+     * @param strPhone      手机号码
+     * @param strMsgContext 短信内容
      */
     public static void toSendMessageActivity(Context mContext, String strPhone,
                                              String strMsgContext) {
@@ -383,10 +378,8 @@ public class SystemUtils {
     /**
      * 跳转至联系人选择界面
      *
-     * @param mContext
-     *            上下文
-     * @param requestCode
-     *            请求返回区分代码
+     * @param mContext    上下文
+     * @param requestCode 请求返回区分代码
      */
     public static void toChooseContactsList(Activity mContext, int requestCode) {
         Intent intent = new Intent(Intent.ACTION_PICK,
@@ -397,12 +390,9 @@ public class SystemUtils {
     /**
      * 获取选择的联系人的手机号码
      *
-     * @param mContext
-     *            上下文
-     * @param resultCode
-     *            请求返回Result状态区分代码
-     * @param data
-     *            onActivityResult返回的Intent
+     * @param mContext   上下文
+     * @param resultCode 请求返回Result状态区分代码
+     * @param data       onActivityResult返回的Intent
      * @return
      */
     @SuppressWarnings("deprecation")
@@ -457,10 +447,8 @@ public class SystemUtils {
     /**
      * 跳转至拍照程序界面
      *
-     * @param mContext
-     *            上下文
-     * @param requestCode
-     *            请求返回Result区分代码
+     * @param mContext    上下文
+     * @param requestCode 请求返回Result区分代码
      */
     public static void toCameraActivity(Activity mContext, int requestCode) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -470,8 +458,7 @@ public class SystemUtils {
     /**
      * 跳转至相册选择界面
      *
-     * @param mContext
-     *            上下文
+     * @param mContext    上下文
      * @param requestCode
      */
     public static void toImagePickerActivity(Activity mContext, int requestCode) {
@@ -484,14 +471,12 @@ public class SystemUtils {
     /**
      * 获得选中相册的图片
      *
-     * @param mContext
-     *            上下文
-     * @param data
-     *            onActivityResult返回的Intent
+     * @param mContext 上下文
+     * @param data     onActivityResult返回的Intent
      * @return
      */
 
-    @SuppressWarnings({ "deprecation", "unused" })
+    @SuppressWarnings({"deprecation", "unused"})
     public static Bitmap getChoosedImage(Activity mContext, Intent data) {
         if (data == null) {
             return null;
@@ -507,7 +492,7 @@ public class SystemUtils {
             Uri originalUri = data.getData(); // 获得图片的uri
             bm = MediaStore.Images.Media.getBitmap(resolver, originalUri); // 显得到bitmap图片
             // 这里开始的第二部分，获取图片的路径：
-            String[] proj = { MediaStore.Images.Media.DATA };
+            String[] proj = {MediaStore.Images.Media.DATA};
             // 好像是android多媒体数据库的封装接口，具体的看Android文档
             Cursor cursor = mContext.managedQuery(originalUri, proj, null,
                     null, null);
@@ -530,10 +515,8 @@ public class SystemUtils {
     /**
      * 调用本地浏览器打开一个网页
      *
-     * @param mContext
-     *            上下文
-     * @param strSiteUrl
-     *            网页地址
+     * @param mContext   上下文
+     * @param strSiteUrl 网页地址
      */
     public static void openWebSite(Context mContext, String strSiteUrl) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(strSiteUrl));
@@ -543,8 +526,7 @@ public class SystemUtils {
     /**
      * 跳转至系统设置界面
      *
-     * @param mContext
-     *            上下文
+     * @param mContext 上下文
      */
     public static void toSettingActivity(Context mContext) {
         Intent settingsIntent = new Intent(Settings.ACTION_SETTINGS);
@@ -554,8 +536,7 @@ public class SystemUtils {
     /**
      * 跳转至WIFI设置界面
      *
-     * @param mContext
-     *            上下文
+     * @param mContext 上下文
      */
     public static void toWIFISettingActivity(Context mContext) {
         Intent wifiSettingsIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);
@@ -565,10 +546,8 @@ public class SystemUtils {
     /**
      * 启动本地应用打开PDF
      *
-     * @param mContext
-     *            上下文
-     * @param filePath
-     *            文件路径
+     * @param mContext 上下文
+     * @param filePath 文件路径
      */
     public static void openPDFFile(Context mContext, String filePath) {
         try {
@@ -589,10 +568,8 @@ public class SystemUtils {
     /**
      * 启动本地应用打开PDF
      *
-     * @param mContext
-     *            上下文
-     * @param filePath
-     *            文件路径
+     * @param mContext 上下文
+     * @param filePath 文件路径
      */
     public static void openWordFile(Context mContext, String filePath) {
         try {
@@ -614,10 +591,8 @@ public class SystemUtils {
     /**
      * 调用WPS打开office文档 http://bbs.wps.cn/thread-22349340-1-1.html
      *
-     * @param mContext
-     *            上下文
-     * @param filePath
-     *            文件路径
+     * @param mContext 上下文
+     * @param filePath 文件路径
      */
     public static void openOfficeByWPS(Context mContext, String filePath) {
 
@@ -681,12 +656,9 @@ public class SystemUtils {
     /**
      * 判断是否存在指定的Activity
      *
-     * @param mContext
-     *            上下文
-     * @param packageName
-     *            包名
-     * @param className
-     *            activity全路径类名
+     * @param mContext    上下文
+     * @param packageName 包名
+     * @param className   activity全路径类名
      * @return
      */
     public static boolean isExistActivity(Context mContext, String packageName,
@@ -862,5 +834,14 @@ public class SystemUtils {
                 .getSystemService(Context.LOCATION_SERVICE));
         List<String> accessibleProviders = locationManager.getProviders(true);
         return accessibleProviders != null && accessibleProviders.size() > 0;
+    }
+
+    public static int[] getDeviceWh(Context context) {
+        int[] wh = new int[2];
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        wh[0] = wm.getDefaultDisplay().getWidth();
+        wh[1] = wm.getDefaultDisplay().getHeight();
+        return wh;
     }
 }
