@@ -53,7 +53,7 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
 
     private LinearLayoutManager mLayoutManager;
     private CityListAdapter mAdapter;
-    private List<City> mAllCities;
+    private List<City> mAllCities = new ArrayList<>();
     private List<HotCity> mHotCities;
     private List<City> mResults;
 
@@ -90,16 +90,16 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
             enableAnim = args.getBoolean("cp_enable_anim");
         }
 
-        initHotCities();
-        initLocatedCity();
-
-        if (mAllCities == null || mAllCities.size() == 0) {
-            mAllCities = dbManager.getAllCities();
-        }
-        mAllCities.add(0, mLocatedCity);
-        mAllCities.add(1, new HotCity("热门城市", "未知", "0"));
-        mResults = new ArrayList<>();
-        mResults.addAll(mAllCities);
+//        initHotCities();
+//        initLocatedCity();
+//
+//        if (mAllCities == null || mAllCities.size() == 0) {
+//            mAllCities = dbManager.getAllCities();
+//        }
+//        mAllCities.add(0, mLocatedCity);
+//        mAllCities.add(1, new HotCity("热门城市", "未知", "0"));
+//        mResults = new ArrayList<>();
+//        mResults.addAll(mAllCities);
     }
 
     private void initLocatedCity() {
@@ -128,6 +128,7 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
 
     public void setLocatedCity(LocatedCity location) {
         mLocatedCity = location;
+        initLocatedCity();
     }
 
     public void setHotCities(List<HotCity> data) {
@@ -138,7 +139,12 @@ public class CityPickerDialogFragment extends AppCompatDialogFragment implements
 
     public void setAllCity(List<City> data) {
         if (data != null && !data.isEmpty()) {
-            this.mAllCities = data;
+            mAllCities.clear();
+            mAllCities.addAll(data);
+            mAllCities.add(0, mLocatedCity);
+            mAllCities.add(1, new HotCity("热门城市", "未知", "0"));
+            mResults = new ArrayList<>();
+            mResults.addAll(mAllCities);
         }
     }
 
