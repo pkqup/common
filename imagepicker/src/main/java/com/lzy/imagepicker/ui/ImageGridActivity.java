@@ -44,8 +44,8 @@ import java.util.List;
  * 2017-03-17
  *
  * @author nanchen
- *         新增可直接传递是否裁剪参数，以及直接拍照
- *         ================================================
+ * 新增可直接传递是否裁剪参数，以及直接拍照
+ * ================================================
  */
 public class ImageGridActivity extends ImageBaseActivity implements ImageDataSource.OnImagesLoadedListener, OnImageItemClickListener, ImagePicker.OnImageSelectedListener, View.OnClickListener {
 
@@ -53,6 +53,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     public static final int REQUEST_PERMISSION_CAMERA = 0x02;
     public static final String EXTRAS_TAKE_PICKERS = "TAKE";
     public static final String EXTRAS_IMAGES = "IMAGES";
+    public static final String NEED_CLEAR = "NEEDCLEAR";
 
     private ImagePicker imagePicker;
 
@@ -88,7 +89,10 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         setContentView(R.layout.activity_image_grid);
 
         imagePicker = ImagePicker.getInstance();
-        imagePicker.clear();
+        boolean booleanExtra = getIntent().getBooleanExtra(NEED_CLEAR, true);
+        if (booleanExtra) {
+            imagePicker.clear();
+        }
         imagePicker.addOnImageSelectedListener(this);
 
         Intent data = getIntent();
