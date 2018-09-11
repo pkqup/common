@@ -25,6 +25,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.util.Xml;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -98,6 +99,24 @@ public class SystemUtils {
         WindowManager wm = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
         return wm.getDefaultDisplay().getHeight();
+    }
+
+    /**
+     * getDeviceWH:【获取设备的分辨率】. <br/>
+     * .@param context .@return.<br/>
+     */
+    public static int[] getDeviceWh(Context context) {
+        final int[] widthAndHeight = new int[2];
+        int width = 0;
+        int height = 0;
+        DisplayMetrics dm = new DisplayMetrics();
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(dm);
+        width = dm.widthPixels;
+        height = dm.heightPixels;
+        widthAndHeight[0] = width;
+        widthAndHeight[1] = height;
+        return widthAndHeight;
     }
 
 
