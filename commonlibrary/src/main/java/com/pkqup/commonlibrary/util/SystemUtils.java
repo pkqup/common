@@ -854,13 +854,4 @@ public class SystemUtils {
         List<String> accessibleProviders = locationManager.getProviders(true);
         return accessibleProviders != null && accessibleProviders.size() > 0;
     }
-
-    public static int[] getDeviceWh(Context context) {
-        int[] wh = new int[2];
-        WindowManager wm = (WindowManager) context
-                .getSystemService(Context.WINDOW_SERVICE);
-        wh[0] = wm.getDefaultDisplay().getWidth();
-        wh[1] = wm.getDefaultDisplay().getHeight();
-        return wh;
-    }
 }
