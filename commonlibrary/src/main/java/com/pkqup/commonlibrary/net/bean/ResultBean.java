@@ -13,6 +13,7 @@ public class ResultBean<T>{
     private String prepayid;
     private String timestamp;
     private String sign;
+    private String url;
 
     private int errorcode;
     private String msg;
@@ -96,5 +97,13 @@ public class ResultBean<T>{
 
     public void setSign(String sign) {
         this.sign = sign;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
