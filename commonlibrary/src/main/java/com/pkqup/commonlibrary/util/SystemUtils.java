@@ -854,4 +854,6 @@ public class SystemUtils {
         List<String> accessibleProviders = locationManager.getProviders(true);
         return accessibleProviders != null && accessibleProviders.size() > 0;
     }
+
+
 }
