@@ -21,6 +21,13 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="dialog_choose_express" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
 
     <style name="BottomDialogStyle" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/anim_up_in</item>
