@@ -200,12 +200,10 @@ public class VerticalSlide extends ViewGroup {
     public void goTop(OnGoTopListener goTopListener) {
         this.goTopListener = goTopListener;
         if (goTopListener != null) goTopListener.goTop();
-        if (currentPage == 2) {
-            //触发缓慢滚动
-            if (mDragHelper.smoothSlideViewTo(view2, 0, viewHeight)) {
-                ViewCompat.postInvalidateOnAnimation(this);
-                isGoTop = true;
-            }
+        //触发缓慢滚动
+        if (mDragHelper.smoothSlideViewTo(view2, 0, viewHeight)) {
+            ViewCompat.postInvalidateOnAnimation(this);
+            isGoTop = true;
         }
     }
 
