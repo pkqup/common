@@ -81,7 +81,7 @@ public class FileUtils {
         ByteArrayOutputStream out = null;
         try {
             out = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, out);
 
             out.flush();
             out.close();
