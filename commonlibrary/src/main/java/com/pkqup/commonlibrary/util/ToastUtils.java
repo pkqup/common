@@ -33,4 +33,12 @@ public class ToastUtils {
         }
     }
 
+    public static void showErrorMsg(Throwable throwable) {
+        if (throwable instanceof ApiException) {
+            ApiException apiException = (ApiException) throwable;
+            ToastUtils.showShort(apiException.getMessage());
+        }
+    }
+
+
 }
