@@ -146,14 +146,7 @@ public class HttpUtils {
     private void addCommonParams(HttpUrl.Builder authorizedUrlBuilder) {
         String token = (String) SPUtils.get("token", "");
         authorizedUrlBuilder.addQueryParameter("format", "json");
-//        authorizedUrlBuilder.addQueryParameter("accessToken", token);
-        //个人:  44fd86649bd5d33eb2038f01349e397ab9c56d1b4985285b889a92ffdf2e81ca
-        //商家： 1ed0c5b256e840e0dbfeae01c86eac1918c7f4532875d76012ac3e8e4238abcf
-        if (USER_TOKEN) {
-            authorizedUrlBuilder.addQueryParameter("accessToken", "bdde04d8b8e27e813ad00b49e65caf6100cadc666306e85c7c0a951176ec5624");
-        } else {
-            authorizedUrlBuilder.addQueryParameter("accessToken", "1ed0c5b256e840e0dbfeae01c86eac1918c7f4532875d76012ac3e8e4238abcf");
-        }
+        authorizedUrlBuilder.addQueryParameter("accessToken", token);
     }
 
 
