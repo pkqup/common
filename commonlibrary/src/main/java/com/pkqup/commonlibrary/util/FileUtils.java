@@ -102,4 +102,29 @@ public class FileUtils {
         }
     }
 
+    public static String bitMapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream out = null;
+        try {
+            out = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, out);
+
+            out.flush();
+            out.close();
+
+            byte[] imgBytes = out.toByteArray();
+            String base64 = Base64.encodeToString(imgBytes, Base64.DEFAULT);
+
+            return "data:image/jpeg;base64," + base64;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            try {
+                out.flush();
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
