@@ -40,6 +40,15 @@ public class GlideUtils {
                 .into(imageView);
     }
 
+    public static void loadImageShop(Context context, Object url, ImageView imageView) {
+        GlideApp.with(context)
+                .load(url)
+                .format(DecodeFormat.PREFER_RGB_565)//像素类型
+                .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存所有尺寸
+                .error(R.mipmap.error_shop)
+                .into(imageView);
+    }
+
     public static void loadImageHead(Context context, Object url, ImageView imageView) {
         GlideApp.with(context)
                 .load(url)
