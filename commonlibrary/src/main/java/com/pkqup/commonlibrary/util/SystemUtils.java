@@ -79,6 +79,8 @@ public class SystemUtils {
         return android.os.Build.MODEL;
     }
 
+
+
     /**
      * 获取手机宽度
      */
