@@ -28,6 +28,7 @@
     <color name="t_gray">#999999</color>
     <color name="t_orange">#FF9600</color>
 
-
+    <color name="my_buy_bg">#e57d00</color>
+    <color name="my_sell_bg">#0c95f5</color>
 
 </resources>
