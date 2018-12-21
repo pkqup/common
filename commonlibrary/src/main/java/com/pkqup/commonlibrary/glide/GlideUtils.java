@@ -29,6 +29,12 @@ public class GlideUtils {
     String gif1 = "http://img.zcool.cn/community/01e97857c929630000012e7e3c2acf.gif";
     String gif2 = "http://5b0988e595225.cdn.sohucs.com/images/20171202/a1cc52d5522f48a8a2d6e7426b13f82b.gif";
     String gif3 = "http://img.zcool.cn/community/01d6dd554b93f0000001bf72b4f6ec.jpg";
+    String gif4 = "https://img.soogif.com/NvIkjiDmRgXyXcjrne68ANtYPHQ621gr.gif";
+    String gif5 = "https://img.soogif.com/Pf7wbm6aIA5f9m2knjNwW4elO3kvAGKy.gif";
+    String gif6 = "https://img.soogif.com/GV8BjdGd2YoG3b9IrThH3jfTNR1CExqx.gif";
+    String gif7 = "https://img.soogif.com/xOUTB9LcXNU6EZrmUareuaUeAS3oKGf6.gif";
+    String gif8 = "https://img.soogif.com/mQKkdii02YdX2Bta4yDzoVQhvfsyigL1.gif";
+    String gif9 = "https://img.soogif.com/9t3kAMiQ5GZ9UaKRu325jd0z0jj5JoK6.gif";
 
 
     public static void loadImage(Context context, Object url, ImageView imageView) {

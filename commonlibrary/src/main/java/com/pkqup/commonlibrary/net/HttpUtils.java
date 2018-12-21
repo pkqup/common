@@ -2,7 +2,6 @@ package com.pkqup.commonlibrary.net;
 
 import android.support.annotation.NonNull;
 
-import com.pkqup.commonlibrary.net.bean.CommonParams;
 import com.pkqup.commonlibrary.net.converter.MyGSonConverterFactory;
 import com.pkqup.commonlibrary.net.exception.ApiException;
 import com.pkqup.commonlibrary.util.AppUtils;
@@ -12,16 +11,11 @@ import com.socks.library.KLog;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
-import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -39,7 +33,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 public class HttpUtils {
 
-    private static String BASE_URL = "http://mall.chunlangjiu.com/";
+//    private static String BASE_URL = "http://mall.chunlangjiu.com/";
+    public static String BASE_URL = "http://test.chunlangjiu.com/";
 
     private volatile static HttpUtils mInstance;
     private Retrofit mRetrofit;
